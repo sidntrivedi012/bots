@@ -21,9 +21,9 @@ import (
 
 var bot *tbot.BotAPI
 
-//ButtonLinks sends the parsed arguements as an inline buttons to the specified chat ID
+// ButtonLinks sends the parsed arguements as an inline buttons to the specified chat ID
 func ButtonLinks(ID int64, ButtonText string, ButtonURL string, MessageText string) {
-	var button = tbot.NewInlineKeyboardMarkup(
+	button := tbot.NewInlineKeyboardMarkup(
 		tbot.NewInlineKeyboardRow(
 			tbot.NewInlineKeyboardButtonURL(ButtonText, ButtonURL),
 		),
@@ -33,9 +33,9 @@ func ButtonLinks(ID int64, ButtonText string, ButtonURL string, MessageText stri
 	bot.Send(msg)
 }
 
-//Streams tweets with the help of Twitter API , bot sends the link of any new tweet or tweet related activity to the specified group on telegram.
+// Streams tweets with the help of Twitter API , bot sends the link of any new tweet or tweet related activity to the specified group on telegram.
 func tweet() {
-	//Initializing twitter API
+	// Initializing twitter API
 	config := oauth1.NewConfig(os.Getenv("TWITTER_CONSUMER_KEY"), os.Getenv("TWITTER_CONSUMER_SECRET"))
 	token := oauth1.NewToken(os.Getenv("TWITTER_ACCESS_TOKEN"), os.Getenv("TWITTER_ACCESS_SECRET"))
 	httpClient := config.Client(oauth1.NoContext, token)
@@ -54,10 +54,9 @@ func tweet() {
 		bot.Send(tbot.NewMessage(GroupID, "New Tweet Alert: \n https://twitter.com/osdcjiit/status/"+tweet.IDStr))
 	}
 	demux.HandleChan(stream.Messages)
-
 }
 
-//Sends message of whatever the user specifies they are doing after they type this command, then deletes the user's command message.
+// Sends message of whatever the user specifies they are doing after they type this command, then deletes the user's command message.
 func me(message *tbot.Message, ID int64) {
 	user := message.From.UserName
 	s := strings.SplitN(message.Text, " ", 2)
@@ -67,7 +66,7 @@ func me(message *tbot.Message, ID int64) {
 	}
 }
 
-//scraping xkcd strip URL from its website with the help of a random generated integer and then sending it as a photo using NewPhotoShare Telegram API method.
+// scraping xkcd strip URL from its website with the help of a random generated integer and then sending it as a photo using NewPhotoShare Telegram API method.
 func xkcd(ID int64) {
 	rand.Seed(time.Now().UnixNano())
 	min := 100
@@ -108,7 +107,7 @@ func help(ID int64) {
 	bot.Send(tbot.NewMessage(ID, msg))
 }
 
-//list of meetup groups urlnames,keeps sending one by one to getmeetups() function in meetup.go
+// list of meetup groups urlnames,keeps sending one by one to getmeetups() function in meetup.go
 func dlmeetups(ID int64) {
 	finallist = ""
 	urlnames := []string{"ilugdelhi", "pydelhi", "GDGNewDelhi", "gdgcloudnd", "Paytm-Build-for-India", "jslovers", "Gurgaon-Go-Meetup", "Mozilla_Delhi", "PyDataDelhi", "React-Delhi-NCR", "OWASP-Delhi-NCR-Chapter"}
@@ -121,7 +120,7 @@ func dlmeetups(ID int64) {
 
 func welcome(user tbot.User, ID int64) {
 	User := fmt.Sprintf("[%v](tg://user?id=%v)", user.FirstName, user.ID)
-	var botSlice = make([]string, 0)
+	botSlice := make([]string, 0)
 	botSlice = append(botSlice,
 		"helping the hackers in here.",
 		"a bot made by the geeks for the geeks.",
@@ -129,7 +128,7 @@ func welcome(user tbot.User, ID int64) {
 		"a distant cousin of the mars rover.",
 		"a friendly bot written in Go.",
 	)
-	var quesSlice = make([]string, 0)
+	quesSlice := make([]string, 0)
 	quesSlice = append(quesSlice,
 		"which language do you work with?",
 		"what do you want to learn?",
@@ -144,15 +143,15 @@ func welcome(user tbot.User, ID int64) {
 	max := len(botSlice) - 1
 	randomNum1 := (rand.Intn(max-min+1) + min)
 	randomNum2 := (rand.Intn(max-min+1) + min)
-	var welcomeMessage1 = fmt.Sprintf(botSlice[randomNum1])
-	var welcomeMessage2 = fmt.Sprintf(quesSlice[randomNum2])
+	welcomeMessage1 := fmt.Sprintf(botSlice[randomNum1])
+	welcomeMessage2 := fmt.Sprintf(quesSlice[randomNum2])
 	reply := tbot.NewMessage(ID, "Welcome "+User+", I am the OSDC-bot, "+welcomeMessage1+
 		" Please introduce yourself. To start with, you can tell us "+welcomeMessage2)
 	reply.ParseMode = "markdown"
 	bot.Send(reply)
 }
 
-//extracts the details of the user who sent the message to check whether the user is creator/admin. Returns true in this case else false.
+// extracts the details of the user who sent the message to check whether the user is creator/admin. Returns true in this case else false.
 func memberdetails(ID int64, userid int) bool {
 	response, _ := bot.GetChatMember(tbot.ChatConfigWithUser{
 		ChatID: ID,
@@ -191,7 +190,6 @@ func main() {
 
 	// Connect to MongoDB
 	client, err := mongo.Connect(context.TODO(), clientOptions)
-
 	if err != nil {
 		log.Fatal(err)
 	}
