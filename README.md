@@ -10,6 +10,7 @@ Compilation of all the bots made for simplifying the repetetive tasks on various
 * Do make sure you have the Go version 1.13.
 * Test your installation - https://golang.org/doc/install#testing
 
+
 ## Clone the bots repository
 ```
 $ git clone https://github.com/osdc/bots
