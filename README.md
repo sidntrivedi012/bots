@@ -1,6 +1,6 @@
 # osdc-bots 🤖
 
-Compilation of all the bots made for simplifying the repetetive tasks on various community platforms of OSDC.
+Compilation of all the bots made for simplifying the repetetive tasks on various community platforms of OSDC
 
 # Telegram Bot Setup Guide
 ## Setup Golang
