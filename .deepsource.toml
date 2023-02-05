@@ -1,9 +1,10 @@
 version = 1
 
+[[analyzers]]
+name = "test-coverage"
 
 [[analyzers]]
 name = "go"
-enabled = true
 
   [analyzers.meta]
   import_root = "github.com/sidntrivedi012/bots"
