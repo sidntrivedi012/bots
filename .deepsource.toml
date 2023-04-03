@@ -1,10 +1,13 @@
 version = 1
 
 [[analyzers]]
-name = "test-coverage"
+name = "javascript"
 
 [[analyzers]]
 name = "go"
 
   [analyzers.meta]
   import_root = "github.com/sidntrivedi012/bots"
+
+[[analyzers]]
+name = "ruby"
