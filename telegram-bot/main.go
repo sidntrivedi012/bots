@@ -307,15 +307,13 @@ func main() {
 			case "me":
 				me(update.Message, ID)
 			default:
-				{
-					msg, err := bot.Send(tbot.NewMessage(ID, "I don't know this command"))
 
-					log.Print(err)
-					timer1 := time.NewTimer(5 * time.Second)
-					<-timer1.C
+				msg, err := bot.Send(tbot.NewMessage(ID, "I don't know this command"))
+				log.Print(err)
+				timer1 := time.NewTimer(5 * time.Second)
+				<-timer1.C
+				bot.DeleteMessage(tbot.NewDeleteMessage(ID, msg.MessageID))
 
-					bot.DeleteMessage(tbot.NewDeleteMessage(ID, msg.MessageID))
-				}
 			}
 		}
 		if update.Message.NewChatMembers != nil {
