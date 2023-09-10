@@ -1,6 +1,7 @@
 # osdc-bots 🤖
 
-Compilation of all the bots made for simplifying the repetetive tasks on various community platforms of OSDC.
+Compilation of all the bots made for simplifying the repetetive tasks on various community platforms of OSDC
+
 
 # Telegram Bot Setup Guide
 ## Setup Golang
@@ -8,6 +9,7 @@ Compilation of all the bots made for simplifying the repetetive tasks on various
 * Follow the setup instructions as per your Operating System.
 * Do make sure you have the Go version 1.13.
 * Test your installation - https://golang.org/doc/install#testing
+
 
 ## Clone the bots repository
 ```
